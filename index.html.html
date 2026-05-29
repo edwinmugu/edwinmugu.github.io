@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Edwin Mugu | Virtual & Executive Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f1117;
+    --cream: #f7f4ef;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --muted: #6b6760;
+    --card: #ffffff;
+    --border: #e2ddd5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(247,244,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--ink); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    border: 1px solid var(--gold-light);
+    padding: 0.35rem 1rem; border-radius: 2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 900; line-height: 1.08;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1.05rem; line-height: 1.75;
+    color: var(--muted); max-width: 480px;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--ink);
+    padding: 0.85rem 2rem; border-radius: 0.35rem;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em;
+    text-decoration: none; transition: all 0.2s;
+    border: 2px solid var(--gold);
+  }
+  .btn-primary:hover { background: transparent; color: var(--gold); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    padding: 0.85rem 2rem; border-radius: 0.35rem;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em;
+    text-decoration: none; transition: all 0.2s;
+    border: 2px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1rem;
+    animation: fadeLeft 0.8s 0.2s ease both;
+  }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem; padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .stat-card .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-card .label {
+    font-size: 0.8rem; color: var(--muted);
+    font-weight: 500; margin-top: 0.4rem;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .avail-card {
+    background: var(--ink); border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .avail-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 4px rgba(74,222,128,0.2);
+    animation: pulse 2s infinite;
+  }
+  .avail-text { color: #fff; font-size: 0.9rem; font-weight: 500; }
+  .avail-text span { color: var(--gold-light); font-size: 0.8rem; display: block; margin-top: 0.1rem; }
+
+  /* SERVICES */
+  .services {
+    padding: 6rem 4rem;
+    background: var(--card);
+  }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 3rem;
+  }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .service-card {
+    border: 1px solid var(--border); border-radius: 1rem;
+    padding: 2rem; transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.08); transform: translateY(-4px); }
+  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .service-card p { font-size: 0.9rem; line-height: 1.7; color: var(--muted); }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .tag {
+    font-size: 0.72rem; font-weight: 500;
+    background: var(--cream); color: var(--muted);
+    padding: 0.25rem 0.6rem; border-radius: 2rem;
+    border: 1px solid var(--border);
+  }
+
+  /* TOOLS */
+  .tools { padding: 6rem 4rem; background: var(--cream); }
+  .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+  .tool-pill {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 0.75rem; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    transition: all 0.2s;
+  }
+  .tool-pill:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .tool-icon { font-size: 1.4rem; }
+  .tool-name { font-size: 0.85rem; font-weight: 600; }
+
+  /* EXPERIENCE */
+  .experience { padding: 6rem 4rem; background: var(--card); }
+  .timeline { margin-top: 2.5rem; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 2.5rem; margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -5px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--card);
+    box-shadow: 0 0 0 3px var(--gold-light);
+  }
+  .timeline-date {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;
+  }
+  .timeline-company { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .timeline-desc { font-size: 0.9rem; line-height: 1.7; color: var(--muted); }
+
+  /* CONTACT */
+  .contact {
+    padding: 6rem 4rem;
+    background: var(--ink); color: #fff;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .contact .section-title { color: #fff; }
+  .contact .section-label { color: var(--gold); }
+  .contact p { color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.75rem;
+  }
+  .contact-item .icon { font-size: 1.2rem; }
+  .contact-item .info { font-size: 0.9rem; }
+  .contact-item .info span { display: block; color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-bottom: 0.1rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.3);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(74,222,128,0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(74,222,128,0.1); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+    .hero-visual { order: -1; }
+    .services { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .tools { padding: 4rem 1.5rem; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .experience { padding: 4rem 1.5rem; }
+    .contact { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Edwin Mugu</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Available for Remote Work</div>
+    <h1>Your Reliable<br/><span>Virtual &</span><br/>Executive Assistant</h1>
+    <p class="hero-sub">
+      5+ years helping executives, founders, and contentpreneurs stay organised, look professional, and get more done — from calendar management to content publishing and everything in between.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Hire Me</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="number">5+</div>
+        <div class="label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">20+</div>
+        <div class="label">Clients Supported</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">100%</div>
+        <div class="label">Remote Ready</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">US PST</div>
+        <div class="label">Shift Available</div>
+      </div>
+    </div>
+    <div class="avail-card">
+      <div class="avail-dot"></div>
+      <div class="avail-text">
+        Currently accepting new clients
+        <span>Available for part-time & full-time remote roles</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What I Do</div>
+  <div class="section-title">Services I Offer</div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">📅</div>
+      <h3>Calendar & Admin Management</h3>
+      <p>Keep your schedule under control. I manage calendars, schedule meetings across time zones, handle inbox organisation, and make sure nothing falls through the cracks.</p>
+      <div class="service-tags">
+        <span class="tag">Google Calendar</span>
+        <span class="tag">Gmail</span>
+        <span class="tag">Scheduling</span>
+        <span class="tag">Inbox Management</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📢</div>
+      <h3>Content Publishing</h3>
+      <p>From blog posts to newsletters and social media, I handle the publishing workflow so your content goes live consistently and on time across all your platforms.</p>
+      <div class="service-tags">
+        <span class="tag">WordPress</span>
+        <span class="tag">Social Media</span>
+        <span class="tag">Newsletters</span>
+        <span class="tag">Scheduling</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Graphic Creation</h3>
+      <p>Clean, branded graphics for social media, presentations, and marketing materials. I create visuals that look professional and stay consistent with your brand identity.</p>
+      <div class="service-tags">
+        <span class="tag">Canva</span>
+        <span class="tag">Social Graphics</span>
+        <span class="tag">Presentations</span>
+        <span class="tag">Branding</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3>Executive Communications</h3>
+      <p>Professional email drafting, stakeholder correspondence, meeting notes, and follow-up coordination — handled with discretion and a high standard of professionalism.</p>
+      <div class="service-tags">
+        <span class="tag">Email Drafting</span>
+        <span class="tag">Meeting Minutes</span>
+        <span class="tag">Slack</span>
+        <span class="tag">Zoom</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Data Entry & Research</h3>
+      <p>Accurate data entry, spreadsheet management, internet research, and document formatting. I keep your records clean, organised, and easy to access.</p>
+      <div class="service-tags">
+        <span class="tag">Google Sheets</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Research</span>
+        <span class="tag">Data Entry</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">✈️</div>
+      <h3>Travel & Logistics</h3>
+      <p>End-to-end travel coordination including bookings, visa support, detailed itineraries, and last-minute changes — so you can travel stress-free and fully prepared.</p>
+      <div class="service-tags">
+        <span class="tag">Travel Booking</span>
+        <span class="tag">Itineraries</span>
+        <span class="tag">Visa Support</span>
+        <span class="tag">Logistics</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools" id="tools">
+  <div class="section-label">Tech Stack</div>
+  <div class="section-title">Tools I Work With</div>
+  <div class="tools-grid">
+    <div class="tool-pill"><span class="tool-icon">📧</span><span class="tool-name">Gmail</span></div>
+    <div class="tool-pill"><span class="tool-icon">💬</span><span class="tool-name">Slack</span></div>
+    <div class="tool-pill"><span class="tool-icon">📅</span><span class="tool-name">Google Calendar</span></div>
+    <div class="tool-pill"><span class="tool-icon">📁</span><span class="tool-name">Google Drive</span></div>
+    <div class="tool-pill"><span class="tool-icon">📄</span><span class="tool-name">Google Docs</span></div>
+    <div class="tool-pill"><span class="tool-icon">📊</span><span class="tool-name">Google Sheets</span></div>
+    <div class="tool-pill"><span class="tool-icon">🎨</span><span class="tool-name">Canva</span></div>
+    <div class="tool-pill"><span class="tool-icon">📽️</span><span class="tool-name">PowerPoint</span></div>
+    <div class="tool-pill"><span class="tool-icon">📝</span><span class="tool-name">Microsoft Word</span></div>
+    <div class="tool-pill"><span class="tool-icon">📈</span><span class="tool-name">Microsoft Excel</span></div>
+    <div class="tool-pill"><span class="tool-icon">🎥</span><span class="tool-name">Zoom</span></div>
+    <div class="tool-pill"><span class="tool-icon">🌐</span><span class="tool-name">Social Media</span></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-label">Background</div>
+  <div class="section-title">Experience & Education</div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">2023 — Present</div>
+      <div class="timeline-role">Freelance General Virtual Assistant</div>
+      <div class="timeline-company">Self-Employed · Remote (Global Clients)</div>
+      <div class="timeline-desc">Delivering VA services to remote clients across marketing, coaching, and e-commerce. Services include content publishing, Canva graphics, inbox management, calendar coordination, social media scheduling, and ad hoc admin support across US and UK time zones.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2022 — 2022</div>
+      <div class="timeline-role">Virtual Executive Assistant</div>
+      <div class="timeline-company">Private Investment Firm · Remote</div>
+      <div class="timeline-desc">Supported CEO and CFO with calendar management, executive communications, travel coordination, expense reporting, and preparation of board-level presentations and briefing materials.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2020 — 2021</div>
+      <div class="timeline-role">Administrative & Content Support Assistant</div>
+      <div class="timeline-company">Regional Financial Services Firm · Remote</div>
+      <div class="timeline-desc">Provided administrative and content support to senior managers including document preparation, calendar management, meeting coordination, social media scheduling, and digital filing management.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">2016 — 2020</div>
+      <div class="timeline-role">Bachelor of Commerce — Business Administration</div>
+      <div class="timeline-company">University of Nairobi</div>
+      <div class="timeline-desc">Graduated with a strong foundation in business operations, communication, organisational management, and financial administration.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Let's Work Together</div>
+    <p>Whether you need a reliable VA for your content business, a part-time EA to keep your calendar under control, or ongoing remote admin support — I am ready to help. Let's talk.</p>
+    <a href="mailto:edwinmugu0@gmail.com" class="btn-primary">Send Me an Email</a>
+  </div>
+  <div class="contact-details">
+    <div class="contact-item">
+      <span class="icon">📱</span>
+      <div class="info">
+        <span>Phone / WhatsApp</span>
+        +254 768 632 219
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="icon">📧</span>
+      <div class="info">
+        <span>Email</span>
+        edwinmugu0@gmail.com
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="icon">🌍</span>
+      <div class="info">
+        <span>Location</span>
+        Remote · Available Globally
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="icon">🕐</span>
+      <div class="info">
+        <span>Availability</span>
+        US PST · UK GMT · EAT — Flexible
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Edwin Mugu · Virtual & Executive Assistant · All Rights Reserved
+</footer>
+
+</body>
+</html>
